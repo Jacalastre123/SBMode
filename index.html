@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spelling Bee</title>
+    <meta name="google-site-verification" content="rBEhW9MugYE6g84ujeJ4sbt90DhMpjkgjt4nfNBnT8M" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: gold;
+            font-family: open sans;
+            text-align: center;
+            
+        }
+
+        input {
+            height: 10vh;
+            width: 50vh;
+            font-size: 2em;
+            padding: 0;
+            
+        }
+        
+        button {
+        	background-color: white;
+            border: 2px solid black;
+            
+        }
+
+        meter {
+            width: 100%;
+        }
+        dialog {
+            border-radius: 10px;
+            padding: 5px;
+            
+        }
+
+      #country, #brand {
+        height: 25%;
+        width: 25%;
+        font-size: 1.5em;
+        padding: 5px;
+      }
+
+      #country {
+        background-image: url("https://www.publicdomainpictures.net/pictures/220000/velka/planet-1494403454Zmz.jpg");
+        background-size: cover;
+      }
+
+      #brand {
+        background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI1LTExL3NyLWltYWdlLTIwMTEyNS1iYi1zLTkwNi1taWN4Z2Z4eS5qcGc.jpg");
+        background-size: cover;
+      }
+    </style>
+</head>
+<body>
+<h1>Spelling bee</h1>
+<h2 id="details"></h2>
+<h5 id="level">Easy Mode</h5>
+<dialog id="dial">
+    <h3>Welcome to spelling bee <strong>Mode edition</strong></h3>
+
+    <p></p>
+    
+    <button onclick="start(this)" id="country">Country Mode</button>
+  <button onclick="start(this)" id="brand">Brands Made</button>
+</dialog>
+<form>
+    <input type="text" id="spelling" placeholder="Word here" autocapitalise="off" autocomplete="off" autofocus="off" spellcheck="off" autocorrect="off">
+</form>
+<button onclick="submit()">Submit</button>
+<button onclick="define()">Definition</button>
+<button onclick="speechSynthesis.speak(new SpeechSynthesisUtterance(currentWord))">Repeat</button>
+
+<dialog id="dial2">
+    <h4 id="victor"></h4>
+    <meter value="3" min="0" max="40" id="meter">
+
+    </meter>
+    <p id="status"></p>
+    <button onclick="dial2.close();dial.showModal()">Restart</button>
+</dialog>
+    <script>
+       
+        const spelling = document.getElementById("spelling")
+        const dial = document.getElementById("dial")
+         const details = document.getElementById("details")
+        const dial2 = document.getElementById("dial2")
+        const status = dial2.querySelector("#status")
+        const meter = dial2.querySelector("#meter")
+        const victor = dial2.querySelector("#victor")
+        const level = document.body.querySelector("#level")
+
+        dial.showModal()
+        let times;
+        let score = 0
+        let strikes = 3
+        let countryList = ["Angola", "China" "Vietnam", "United States", "South Korea", "Brazil", "Columbia", "South Africa", "Botswana", "Australia", "New Zealand", "Tuvalu", "Afghanistan", "Belarus", "Ukraine", "France", "Germany", "Sweeden", "Denmark", "Azarbaijan", "Algeria", "Libya", "Central African Republic", "Saudi Arabia", "Iran", "Iraq", "Spain", "Portugal", "Tuvalu", "Finland", "Norway", "Argentina", "Vanuatu", "Kazakstan", "Canada", "Laos", "Egypt", "Bahrain", "Qatar", "Kuwait", "Belgium", "Netherlands", "Mexico", "Saint Vincent And The Grenadines", "Italy", "Chile", "Suriname", "Guyana", "Nigeria", "Cameroon", "Togo", "Sudan", "Ethiopia", "Indonesia", "Malaysia", "Papua New Guina", "Ghana", "Antigua and Barbuda", "Haiti", "Dominican Republic", "Moldova", "Serbia"]
+        let brandList = ["Nike", "Microsoft", "Apple", "Amazon", "Sony", "Big W", "Target", "Adidas", "Converse", "MSI", "Gigabyte", "Nvidia", "AMD", "Intel", "Fujifilm", "Roblox", "Mojang", "Westfield", "Stocklands", "Lego", "Ikea", "Rubiks", "Google", "Activision", "EA", "Ubisoft", "Gameloft", "Xbox", "Windows", "Playstation", "Sketchers", "Call Of Duty", "Toyota", "Asphalt", "Xiaomi", "ZTE", "Nokia", "HMD", "Alcatel", "Lenovo", "HP", "Dell", "Minecraft", "Ebay", "Kahoot", 'Blooket", "Sushi Hub", "Haribo", "Hobbyco", "Pokemon", "Nintendo"]
+      details.innerHTML = countryList.length + brandList.length+ " Words Currently!"
+        console.log()
+     let sortedCountry;
+      let sortedBrand;
+    let currentWord;
+      let mode;
+
+
+     async function getWord(word) {
+        const res = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + word)
+
+        const defTrue = await res.json();
+            return defTrue[0].meanings[0].definitions[0].definition
+     }
+
+     async function define(words) {
+        speechSynthesis.speak(new SpeechSynthesisUtterance(await getWord(currentWord)))
+     }
+        function start(button) {
+        document.body.querySelector("form").addEventListener("submit", (event) => {
+       
+                event.preventDefault()
+                submit()
+            
+        })
+
+          if (button.innerText === "Country Mode") {
+            sortedCountry = countryList.sort(() => Math.floor(Math.random() - 0.5))
+            speechSynthesis.cancel()
+            mode = "Countries"
+                        const speech = new SpeechSynthesisUtterance(sortedCountry[0])
+                        
+                        speech.lang = "en-UK"
+            currentWord = sortedCountry[0]
+
+            level.innerHTML = "Country Mode"
+            document.body.style.backgroundColor = "green"
+             details.innerHTML = "3 Strikes Remaining<br>0/" + sortedCountry.length
+          }
+
+          if (button.innerText === "Brand Mode") {
+            sortedBrand = brandList.sort(() => Math.floor(Math.random() - 0.5))
+            speechSynthesis.cancel()
+            mode = "brands"
+                        const speech = new SpeechSynthesisUtterance(sortedBrand[0])
+                        
+                        speech.lang = "en-UK"
+            currentWord = sortedBrand[0]
+
+            level.innerHTML = "country Mode"
+            document.body.style.backgroundColor = "lightblue"
+             details.innerHTML = "3 Strikes Remaining<br>0/" + sortedBrand.length
+          }
+           
+         
+            score = 0
+            times = -1
+            strikes = 3
+
+            times++
+          
+            
+            speechSynthesis.speak(speech)
+            dial.close()
+
+        }
+    
+        function submit() {
+           speechSynthesis.cancel()
+            if (spelling.value.toLowerCase() === sortedCountry[score] && mode === "Countries" && score <= 20) {
+              if (score === 20) {
+                speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Countries!))
+                    dial2.showModal()
+                    victor.innerText = "You Won!"
+                    meter.value = score
+                    meter.max = sortedCountry.length
+                    document.body.style.backgroundColor = "green"                  
+              }
+              else {
+                details.innerHTML = strikes + " Strikes Remaining<br>"+ score + "/" + sortedCountry.length
+
+                  
+          
+          currentWord = sortedCountry[score + 1]
+                speechSynthesis.speak(new SpeechSynthesisUtterance(currentWord))
+                  score++
+                  
+              }
+            }
+
+            if (spelling.value.toLowerCase() === sortedCountry[score] && mode === "brands" && score <= 20) {
+              if (score === 20) {
+                speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Brands!))
+                                                                   dial2.showModal()
+                    victor.innerText = "You Won!"
+                    meter.value = score
+                  meter.max = sortedBrand.length
+                   document.body.style.backgroundColor = "green"  
+              }
+              else {
+                details.innerHTML = strikes + " Strikes Remaining<br>"+ score + "/" + sortedBrand.length
+              
+                  
+          
+          currentWord = sortedCountry[score + 1]
+                speechSynthesis.speak(new SpeechSynthesisUtterance(currentWord))
+                  score++
+                  
+              }
+            }
+
+            }
+            
+
+            
+
+                 else {
+                console.log("You lost")
+                strikes--
+
+                if (strikes === 0) {
+                    dial2.showModal()
+                    victor.innerText = "You Lost"
+                    meter.value = score
+
+            }
+
+           spelling.value= ""
+           details.innerHTML = strikes + " Strikes Remaining<br>"+ score + "/45"
+        }
+       
+           
+
+        
+
+    </script>
+</body>
+</html>
