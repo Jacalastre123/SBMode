@@ -172,7 +172,7 @@
            speechSynthesis.cancel()
             if (spelling.value.toLowerCase() === sortedCountry[score] && mode === "Countries" && score <= 20) {
               if (score === 20) {
-                speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Countries!))
+                speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Countries!"))
                     dial2.showModal()
                     victor.innerText = "You Won!"
                     meter.value = score
@@ -193,7 +193,7 @@
 
             if (spelling.value.toLowerCase() === sortedCountry[score] && mode === "brands" && score <= 20) {
               if (score === 20) {
-                speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Brands!))
+                speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Brands!"))
                                                                    dial2.showModal()
                     victor.innerText = "You Won!"
                     meter.value = score
@@ -218,7 +218,7 @@
             
 
                  else {
-                console.log("You lost")
+           
                 strikes--
 
                 if (strikes === 0) {
