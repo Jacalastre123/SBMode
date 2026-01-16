@@ -44,7 +44,23 @@
         width: 25%;
         font-size: 1.5em;
         padding: 5px;
+          position: relative;
+          z-index: 1;
+          color: white;
       }
+
+    #country::before, #brand::after {
+        z-index: -1;
+        background-color: rgba(0,0,0,0.6);
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        content: " "
+    }
+
+    
 
       #country {
         background-image: url("https://www.publicdomainpictures.net/pictures/220000/velka/planet-1494403454Zmz.jpg");
