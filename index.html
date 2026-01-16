@@ -191,7 +191,7 @@
               }
             }
 
-            if (spelling.value.toLowerCase() === sortedCountry[score] && mode === "brands" && score <= 20) {
+            else if (spelling.value.toLowerCase() === sortedBrand[score] && mode === "brands" && score <= 20) {
               if (score === 20) {
                 speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Brands!"))
                                                                    dial2.showModal()
@@ -217,7 +217,7 @@
 
             
 
-                 else {
+            else {
            
                 strikes--
 
