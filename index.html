@@ -99,6 +99,7 @@
         let times;
         let score = 0
         let strikes = 3
+        let speech;
         let countryList = ["Angola", "China", "Vietnam", "United States", "South Korea", "Brazil", "Columbia", "South Africa", "Botswana", "Australia", "New Zealand", "Tuvalu", "Afghanistan", "Belarus", "Ukraine", "France", "Germany", "Sweeden", "Denmark", "Azarbaijan", "Algeria", "Libya", "Central African Republic", "Saudi Arabia", "Iran", "Iraq", "Spain", "Portugal", "Tuvalu", "Finland", "Norway", "Argentina", "Vanuatu", "Kazakstan", "Canada", "Laos", "Egypt", "Bahrain", "Qatar", "Kuwait", "Belgium", "Netherlands", "Mexico", "Saint Vincent And The Grenadines", "Italy", "Chile", "Suriname", "Guyana", "Nigeria", "Cameroon", "Togo", "Sudan", "Ethiopia", "Indonesia", "Malaysia", "Papua New Guina", "Ghana", "Antigua and Barbuda", "Haiti", "Dominican Republic", "Moldova", "Serbia"]
         let brandList = ["Nike", "Microsoft", "Apple", "Amazon", "Sony", "Big W", "Target", "Adidas", "Converse", "MSI", "Gigabyte", "Nvidia", "AMD", "Intel", "Fujifilm", "Roblox", "Mojang", "Westfield", "Stocklands", "Lego", "Ikea", "Rubiks", "Google", "Activision", "EA", "Ubisoft", "Gameloft", "Xbox", "Windows", "Playstation", "Sketchers", "Call Of Duty", "Toyota", "Asphalt", "Xiaomi", "ZTE", "Nokia", "HMD", "Alcatel", "Lenovo", "HP", "Dell", "Minecraft", "Ebay", "Kahoot", "Blooket", "Sushi Hub", "Haribo", "Hobbyco", "Pokemon", "Nintendo"]
       details.innerHTML = countryList.length + brandList.length+ " Words Currently!"
@@ -131,7 +132,7 @@
             sortedCountry = countryList.sort(() => Math.floor(Math.random() - 0.5))
             speechSynthesis.cancel()
             mode = "Countries"
-                        const speech = new SpeechSynthesisUtterance(sortedCountry[0])
+                        speech = new SpeechSynthesisUtterance(sortedCountry[0])
                         
                         speech.lang = "en-UK"
             currentWord = sortedCountry[0]
