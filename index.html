@@ -162,7 +162,7 @@
             sortedBrand = brandList.sort(() => Math.floor(Math.random() - 0.5))
             speechSynthesis.cancel()
             mode = "brands"
-                        const speech = new SpeechSynthesisUtterance(sortedBrand[0])
+                        speech = new SpeechSynthesisUtterance(sortedBrand[0])
                         
                         speech.lang = "en-UK"
             currentWord = sortedBrand[0]
