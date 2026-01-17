@@ -149,7 +149,7 @@
        
 
           if (button.innerText === "Country Mode") {
-            sortedCountry = countryList.sort(() => Math.floor(Math.random() - 0.5))
+            sortedCountry = [...countryList].sort(() => Math.floor(Math.random() - 0.5))
             speechSynthesis.cancel()
             mode = "Countries"
                         speech = new SpeechSynthesisUtterance(sortedCountry[0])
@@ -162,7 +162,7 @@
              details.innerHTML = "3 Strikes Remaining<br>0/" + sortedCountry.length
           }
           if (button.innerText === "Brands Mode") {
-            sortedBrand = countryList.sort(() => Math.floor(Math.random() - 0.5))
+            sortedBrand = [...brandList].sort(() => Math.floor(Math.random() - 0.5))
             speechSynthesis.cancel()
             mode = "Countries"
                         speech = new SpeechSynthesisUtterance(sortedBrand[0])
@@ -227,7 +227,7 @@
               
                   
           
-          currentWord = sortedCountry[score + 1]
+          currentWord = sortedBrand[score + 1]
                 speechSynthesis.speak(new SpeechSynthesisUtterance(currentWord))
                   
                   
