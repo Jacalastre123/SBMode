@@ -198,19 +198,21 @@
                     document.body.style.backgroundColor = "green"                  
               }
               else {
+                   score++
                 details.innerHTML = strikes + " Strikes Remaining<br>"+ score + "/" + sortedCountry.length
 
                   
           
           currentWord = sortedCountry[score + 1]
                 speechSynthesis.speak(new SpeechSynthesisUtterance(currentWord))
-                  score++
+                 
                   
               }
             }
 
             else if (spelling.value === sortedBrand[score] && mode === "brands" && score <= 20) {
               if (score === 20) {
+                  score++
                 speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Brands!"))
                                                                    dial2.showModal()
                     victor.innerText = "You Won!"
@@ -225,7 +227,7 @@
           
           currentWord = sortedCountry[score + 1]
                 speechSynthesis.speak(new SpeechSynthesisUtterance(currentWord))
-                  score++
+                  
                   
               }
             }
