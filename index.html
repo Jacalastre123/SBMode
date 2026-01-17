@@ -159,7 +159,6 @@
              details.innerHTML = "3 Strikes Remaining<br>0/" + sortedCountry.length
           }
 
-          if (button.innerText === "Brand Mode") {
             sortedBrand = brandList.sort(() => Math.floor(Math.random() - 0.5))
             speechSynthesis.cancel()
             mode = "brands"
@@ -168,7 +167,7 @@
                         speech.lang = "en-UK"
             currentWord = sortedBrand[0]
 
-            level.innerHTML = "country Mode"
+            level.innerHTML = "Brands Mode"
             document.body.style.backgroundColor = "lightblue"
              details.innerHTML = "3 Strikes Remaining<br>0/" + sortedBrand.length
           }
