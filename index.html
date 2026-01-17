@@ -191,7 +191,7 @@
     
         function submit() {
            speechSynthesis.cancel()
-            if (spelling.value === sortedCountry[score] && mode === "Countries" && score <= 20) {
+            if (spelling.value === sortedCountry[score + 1] && mode === "Countries" && score <= 20) {
               if (score === 20) {
                 speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Countries!"))
                     dial2.showModal()
@@ -213,7 +213,7 @@
               }
             }
 
-            else if (spelling.value === sortedBrand[score] && mode === "brands" && score <= 20) {
+            else if (spelling.value === sortedBrand[score + 1] && mode === "brands" && score <= 20) {
               if (score === 20) {
                   score++
                 speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Brands!"))
