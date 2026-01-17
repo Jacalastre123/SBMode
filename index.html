@@ -201,7 +201,7 @@
               }
               else {
                    score++
-                details.innerHTML = strikes + " Strikes Remaining<br>"+ score + "/" + sortedCountry.length
+                details.innerHTML = strikes + " Strikes Remaining<br>"+ score + "/" + 20
 
                   
           
@@ -223,7 +223,7 @@
                    document.body.style.backgroundColor = "green"  
               }
               else {
-                details.innerHTML = strikes + " Strikes Remaining<br>"+ score + "/" + sortedBrand.length
+                details.innerHTML = strikes + " Strikes Remaining<br>"+ score + "/" + 20
               
                   
           
@@ -247,7 +247,7 @@
                     dial2.showModal()
                     victor.innerText = "You Lost"
                     meter.value = score
-
+                    status.innerHTML = "You did: " score + "/20"
             }
             }
 
