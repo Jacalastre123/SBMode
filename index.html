@@ -161,6 +161,7 @@
             document.body.style.backgroundColor = "green"
              details.innerHTML = "3 Strikes Remaining<br>0/" + 20
           }
+            
           if (button.innerText === "Brands Mode") {
             sortedBrand = [...brandList].sort(() => Math.random() - 0.5)
             speechSynthesis.cancel()
@@ -170,8 +171,8 @@
                         speech.lang = "en-UK"
             currentWord = sortedBrand[0]
 
-            level.innerHTML = "Country Mode"
-            document.body.style.backgroundColor = "green"
+            level.innerHTML = "Brand Mode"
+            document.body.style.backgroundColor = "lightblue"
              details.innerHTML = "3 Strikes Remaining<br>0/" + 20
           }
            
