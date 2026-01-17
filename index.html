@@ -121,8 +121,8 @@
         let brandList = ["Nike", "Microsoft", "Apple", "Amazon", "Sony", "Big W", "Target", "Adidas", "Converse", "MSI", "Gigabyte", "Nvidia", "AMD", "Intel", "Fujifilm", "Roblox", "Mojang", "Westfield", "Stocklands", "Lego", "Ikea", "Rubiks", "Google", "Activision", "EA", "Ubisoft", "Gameloft", "Xbox", "Windows", "Playstation", "Sketchers", "Call Of Duty", "Toyota", "Asphalt", "Xiaomi", "ZTE", "Nokia", "HMD", "Alcatel", "Lenovo", "HP", "Dell", "Minecraft", "Ebay", "Kahoot", "Blooket", "Sushi Hub", "Haribo", "Hobbyco", "Pokemon", "Nintendo"]
       details.innerHTML = countryList.length + brandList.length+ " Words Currently!"
 
-    let sortedBrand;
-     let sortedCountry;
+    let sortedBrand = [];
+     let sortedCountry = [];
     
     let currentWord;
       let mode;
@@ -149,7 +149,7 @@
        
 
           if (button.innerText === "Country Mode") {
-            sortedCountry = [...countryList].sort(() => Math.floor(Math.random() - 0.5))
+            sortedCountry = [...countryList].sort(() => Math.random() - 0.5)
             speechSynthesis.cancel()
             mode = "Countries"
                         speech = new SpeechSynthesisUtterance(sortedCountry[0])
@@ -162,7 +162,7 @@
              details.innerHTML = "3 Strikes Remaining<br>0/" + sortedCountry.length
           }
           if (button.innerText === "Brands Mode") {
-            sortedBrand = [...brandList].sort(() => Math.floor(Math.random() - 0.5))
+            sortedBrand = [...brandList].sort(() => Math.random() - 0.5)
             speechSynthesis.cancel()
             mode = "Countries"
                         speech = new SpeechSynthesisUtterance(sortedBrand[0])
