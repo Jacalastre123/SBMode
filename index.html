@@ -120,9 +120,10 @@
         let countryList = ["Angola", "China", "Vietnam", "United States", "South Korea", "Brazil", "Columbia", "South Africa", "Botswana", "Australia", "New Zealand", "Tuvalu", "Afghanistan", "Belarus", "Ukraine", "France", "Germany", "Sweeden", "Denmark", "Azarbaijan", "Algeria", "Libya", "Central African Republic", "Saudi Arabia", "Iran", "Iraq", "Spain", "Portugal", "Tuvalu", "Finland", "Norway", "Argentina", "Vanuatu", "Kazakstan", "Canada", "Laos", "Egypt", "Bahrain", "Qatar", "Kuwait", "Belgium", "Netherlands", "Mexico", "Saint Vincent And The Grenadines", "Italy", "Chile", "Suriname", "Guyana", "Nigeria", "Cameroon", "Togo", "Sudan", "Ethiopia", "Indonesia", "Malaysia", "Papua New Guina", "Ghana", "Antigua and Barbuda", "Haiti", "Dominican Republic", "Moldova", "Serbia"]
         let brandList = ["Nike", "Microsoft", "Apple", "Amazon", "Sony", "Big W", "Target", "Adidas", "Converse", "MSI", "Gigabyte", "Nvidia", "AMD", "Intel", "Fujifilm", "Roblox", "Mojang", "Westfield", "Stocklands", "Lego", "Ikea", "Rubiks", "Google", "Activision", "EA", "Ubisoft", "Gameloft", "Xbox", "Windows", "Playstation", "Sketchers", "Call Of Duty", "Toyota", "Asphalt", "Xiaomi", "ZTE", "Nokia", "HMD", "Alcatel", "Lenovo", "HP", "Dell", "Minecraft", "Ebay", "Kahoot", "Blooket", "Sushi Hub", "Haribo", "Hobbyco", "Pokemon", "Nintendo"]
       details.innerHTML = countryList.length + brandList.length+ " Words Currently!"
-        console.log()
+
+    let sortedBrand;
      let sortedCountry;
-      let sortedBrand;
+    
     let currentWord;
       let mode;
 
@@ -137,13 +138,15 @@
      async function define(words) {
         speechSynthesis.speak(new SpeechSynthesisUtterance(await getWord(currentWord)))
      }
-        function start(button) {
-        document.body.querySelector("form").addEventListener("submit", (event) => {
+
+         document.body.querySelector("form").addEventListener("submit", (event) => {
        
                 event.preventDefault()
                 submit()
             
         })
+        function start(button) {
+       
 
           if (button.innerText === "Country Mode") {
             sortedCountry = countryList.sort(() => Math.floor(Math.random() - 0.5))
@@ -158,18 +161,17 @@
             document.body.style.backgroundColor = "green"
              details.innerHTML = "3 Strikes Remaining<br>0/" + sortedCountry.length
           }
-            if (button.innerText === "Brands Mode") {
-
-            sortedBrand = brandList.sort(() => Math.floor(Math.random() - 0.5))
+          if (button.innerText === "Brands Mode") {
+            sortedBrand = countryList.sort(() => Math.floor(Math.random() - 0.5))
             speechSynthesis.cancel()
-            mode = "brands"
+            mode = "Countries"
                         speech = new SpeechSynthesisUtterance(sortedBrand[0])
                         
                         speech.lang = "en-UK"
             currentWord = sortedBrand[0]
 
-            level.innerHTML = "Brands Mode"
-            document.body.style.backgroundColor = "lightblue"
+            level.innerHTML = "Country Mode"
+            document.body.style.backgroundColor = "green"
              details.innerHTML = "3 Strikes Remaining<br>0/" + sortedBrand.length
           }
            
