@@ -84,7 +84,7 @@
     <p></p>
     
     <button onclick="start(this)" id="country">Country Mode</button>
-  <button onclick="start(this)" id="brand">Brands Made</button>
+  <button onclick="start(this)" id="brand">Brands Mode</button>
 </dialog>
 <form>
     <input type="text" id="spelling" placeholder="Word here" autocapitalise="off" autocomplete="off" autofocus="off" spellcheck="false" autocorrect="off" >
@@ -158,6 +158,7 @@
             document.body.style.backgroundColor = "green"
              details.innerHTML = "3 Strikes Remaining<br>0/" + sortedCountry.length
           }
+            if (button.innerText === "Brands Mode") {
 
             sortedBrand = brandList.sort(() => Math.floor(Math.random() - 0.5))
             speechSynthesis.cancel()
