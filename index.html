@@ -196,8 +196,8 @@
             currentWord = sortedLongWords[0]
 
             level.innerHTML = "Extreme Words Mode"
-            document.body.style.backgroundColor = "lightblue"
-             details.innerHTML = "3 Strikes Remaining<br>0/" + 10
+            document.body.style.backgroundColor = "red"
+             details.innerHTML = "3 Strikes Remaining<br>0/" + 20
           }
            
            
@@ -262,8 +262,8 @@
               }
             }
 
-                  else if (spelling.value === sortedLongWords[score] && mode === "Long Words" && score <= 10) {
-              if (score === 10) {
+                  else if (spelling.value === sortedLongWords[score] && mode === "Long Words" && score <= 20) {
+              if (score === w0) {
                   score++
                 speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Long Words! The fact that you beaten this is suprising!"))
                                                                    dial2.showModal()
