@@ -72,19 +72,25 @@
         background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI1LTExL3NyLWltYWdlLTIwMTEyNS1iYi1zLTkwNi1taWN4Z2Z4eS5qcGc.jpg");
         background-size: cover;
       }
+        #longWord {
+        background-image: url("https://cdn.pixabay.com/photo/2015/01/27/16/03/dictionary-613910_960_720.jpg");
+        background-size: cover;
+        font-size: 1.2em;
+       }
     </style>
 </head>
 <body>
 <h1>Spelling bee</h1>
 <h2 id="details"></h2>
-<h5 id="level">Easy Mode</h5>
+<h5 id="level">Mode Here</h5>
 <dialog id="dial">
-    <h3>Welcome to spelling bee <strong>Mode edition</strong></h3>
+    <h3>Welcome to Spelling Bee <strong>Mode edition</strong></h3>
 
     <p></p>
     
     <button onclick="start(this)" id="country">Country Mode</button>
   <button onclick="start(this)" id="brand">Brands Mode</button>
+    <button onclick="start(this)" id="LongWord">Extreme Words Mode</button>
 </dialog>
 <form>
     <input type="text" id="spelling" placeholder="Word here" autocapitalise="off" autocomplete="off" autofocus="off" spellcheck="false" autocorrect="off" >
@@ -119,11 +125,12 @@
         let speech;
         let countryList = ["Angola", "China", "Vietnam", "United States", "South Korea", "Brazil", "Columbia", "South Africa", "Botswana", "Australia", "New Zealand", "Tuvalu", "Afghanistan", "Belarus", "Ukraine", "France", "Germany", "Sweeden", "Denmark", "Azarbaijan", "Algeria", "Libya", "Central African Republic", "Saudi Arabia", "Iran", "Iraq", "Spain", "Portugal", "Tuvalu", "Finland", "Norway", "Argentina", "Vanuatu", "Kazakstan", "Canada", "Laos", "Egypt", "Bahrain", "Qatar", "Kuwait", "Belgium", "Netherlands", "Mexico", "Saint Vincent And The Grenadines", "Italy", "Chile", "Suriname", "Guyana", "Nigeria", "Cameroon", "Togo", "Sudan", "Ethiopia", "Indonesia", "Malaysia", "Papua New Guina", "Ghana", "Antigua and Barbuda", "Haiti", "Dominican Republic", "Moldova", "Serbia"]
         let brandList = ["Nike", "Microsoft", "Apple", "Amazon", "Sony", "Big W", "Target", "Adidas", "Converse", "MSI", "Gigabyte", "Nvidia", "AMD", "Intel", "Fujifilm", "Roblox", "Mojang", "Westfield", "Stocklands", "Lego", "Ikea", "Rubiks", "Google", "Activision", "EA", "Ubisoft", "Gameloft", "Xbox", "Windows", "Playstation", "Sketchers", "Call Of Duty", "Toyota", "Asphalt", "Xiaomi", "ZTE", "Nokia", "HMD", "Alcatel", "Lenovo", "HP", "Dell", "Minecraft", "Ebay", "Kahoot", "Blooket", "Sushi Hub", "Haribo", "Hobbyco", "Pokemon", "Nintendo"]
-      details.innerHTML = countryList.length + brandList.length+ " Words Currently!"
+        let longWordList = ["Pneumonoultramicroscopicsilicovolcanoconiosis", "Antidisestablishmentarianism", "Supercalifragilisticeexpialidocious", "Pseudohypopoparathyroidism", "Psychoneuroimmunology", "Hippopotomostrosesquipedaliophobia","Hexakosioihexekontahexaphobia", "Spectrophotofluorometrically", "Psychoneuroendocrinological", "Electroencephalography", "Angioplasty", "Counterproductive", "Incomprehensible", "Hypothetically", "Rehabilitation", "Interdiciplinary", "Disproportionableness", "Subcompartmentalisation", "Laryngotracheobronchitis", "Floccinaucinihipiliplification", "Dichlorodiphenyltrichoroethane", ]
+      details.innerHTML = countryList.length + brandList.length + + longWordList.length " Words Currently!"
 
     let sortedBrand = [];
      let sortedCountry = [];
-    
+    let sortedLongWords = []
     let currentWord;
       let mode;
 
@@ -175,6 +182,22 @@
             document.body.style.backgroundColor = "lightblue"
              details.innerHTML = "3 Strikes Remaining<br>0/" + 20
           }
+
+
+                 if (button.innerText === "Extreme Words Mode") {
+            sortedLongWords = [...longWordList].sort(() => Math.random() - 0.5)
+            speechSynthesis.cancel()
+            mode = "Long Words"
+                        speech = new SpeechSynthesisUtterance(sortedLongWords[0])
+                        
+                        speech.lang = "en-UK"
+            currentWord = sortedBrand[0]
+
+            level.innerHTML = "Extreme Words Mode"
+            document.body.style.backgroundColor = "lightblue"
+             details.innerHTML = "3 Strikes Remaining<br>0/" + 10
+          }
+           
            
          
             score = 0
@@ -191,7 +214,7 @@
     
         function submit() {
            speechSynthesis.cancel()
-            if (spelling.value === sortedCountry[score + 1] && mode === "Countries" && score <= 20) {
+            if (spelling.value === sortedCountry[score] && mode === "Countries" && score <= 20) {
               if (score === 20) {
                 speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Countries!"))
                     dial2.showModal()
@@ -206,16 +229,17 @@
 
                   
           
-          currentWord = sortedCountry[score + 1]
+          currentWord = sortedCountry[score]
                 speechSynthesis.speak(new SpeechSynthesisUtterance(currentWord))
                  
                   
               }
             }
 
-            else if (spelling.value === sortedBrand[score + 1] && mode === "brands" && score <= 20) {
+            else if (spelling.value === sortedBrand[score] && mode === "brands" && score <= 20) {
+                 
               if (score === 20) {
-                  score++
+                 score++
                 speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Brands!"))
                                                                    dial2.showModal()
                     victor.innerText = "You Won!"
@@ -224,11 +248,35 @@
                    document.body.style.backgroundColor = "green"  
               }
               else {
+                   score++
                 details.innerHTML = strikes + " Strikes Remaining<br>"+ score + "/" + 20
               
                   
           
-          currentWord = sortedBrand[score + 1]
+          currentWord = sortedBrand[score]
+                speechSynthesis.speak(new SpeechSynthesisUtterance(currentWord))
+                  
+                  
+              }
+            }
+
+                  else if (spelling.value === sortedLongWords[score] && mode === "Long Words" && score <= 10) {
+              if (score === 10) {
+                  score++
+                speechSynthesis.speak(new SpeechSynthesisUtterance("Congrat you won! This mode is about Long Words! The fact that you beaten this is suprising!"))
+                                                                   dial2.showModal()
+                    victor.innerText = "You Won!"
+                    meter.value = score
+                  meter.max = 10
+                   document.body.style.backgroundColor = "green"  
+              }
+              else {
+                   score++
+                details.innerHTML = strikes + " Strikes Remaining<br>"+ score + "/" + 20
+              
+                  
+          
+          currentWord = sortedLongWords[score]
                 speechSynthesis.speak(new SpeechSynthesisUtterance(currentWord))
                   
                   
