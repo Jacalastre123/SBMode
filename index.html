@@ -105,6 +105,7 @@
 
     </meter>
     <p id="status"></p>
+    <p id="wordShow"></p>
     <button onclick="dial2.close();dial.showModal()">Restart</button>
 </dialog>
     <script>
@@ -117,6 +118,7 @@
         const meter = dial2.querySelector("#meter")
         const victor = dial2.querySelector("#victor")
         const level = document.body.querySelector("#level")
+        const wordShow = dial2.body.querySelector("#wordShow")
 
         dial.showModal()
         let times;
@@ -297,6 +299,7 @@
                     victor.innerText = "You Lost"
                     meter.value = score
                     status.innerHTML = "You did: " + score + "/20"
+                    wordShow.innerHTML = "The Word: " + currentWord
             }
             }
 
